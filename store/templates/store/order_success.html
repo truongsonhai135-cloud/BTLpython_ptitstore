@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đặt hàng thành công - Tiệm Văn Phòng Phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container text-center mt-5">
+        <div class="card shadow-sm p-5 mx-auto" style="max-width: 600px;">
+            <div class="text-success mb-3" style="font-size: 60px;">🎉</div>
+            <h2 class="fw-bold text-success mb-3">Đặt hàng thành công!</h2>
+            <p class="fs-5">Cảm ơn bạn đã mua sắm tại Tiệm Văn Phòng Phẩm PTIT.</p>
+            <hr>
+            <div class="text-start bg-light p-3 rounded mb-4">
+                <p class="mb-1"><strong>Mã đơn hàng:</strong> #{{ order.id }}</p>
+                <p class="mb-1"><strong>Người nhận:</strong> {{ order.full_name }}</p>
+                <p class="mb-1"><strong>Số điện thoại:</strong> {{ order.phone }}</p>
+                <p class="mb-1"><strong>Địa chỉ:</strong> {{ order.address }}</p>
+                <p class="mb-0"><strong>Tổng tiền:</strong> <span class="text-danger fw-bold">{{ order.total_price }} đ</span></p>
+            </div>
+            <a href="/" class="btn btn-primary btn-lg">← Tiếp tục mua sắm</a>
+        </div>
+    </div>
+</body>
+</html>

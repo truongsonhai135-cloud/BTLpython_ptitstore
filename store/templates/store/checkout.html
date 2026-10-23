@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thanh toán đơn hàng - Tiệm Văn Phòng Phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark mb-4 py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">📚 Tiệm Văn Phòng Phẩm PTIT</a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2 class="mb-4 fw-bold">Thông tin giao hàng & Thanh toán</h2>
+        
+        <div class="row">
+            <!-- Cột trái: Form nhập thông tin khách hàng -->
+            <div class="col-md-7">
+                <div class="card shadow-sm p-4 mb-4">
+                    <h4 class="mb-3 text-primary fw-bold">Thông tin người nhận</h4>
+                    <form method="POST" action="{% url 'checkout' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label font-weight-bold">Họ và tên *</label>
+                            <input type="text" name="name" class="form-control" placeholder="Ví dụ: Nguyễn Văn A" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label font-weight-bold">Số điện thoại *</label>
+                            <input type="tel" name="phone" class="form-control"
+                                   placeholder="Ví dụ: 0987654321"
+                                   pattern="0[0-9]{9}" minlength="10" maxlength="10"
+                                   inputmode="numeric"
+                                   title="Số điện thoại phải bắt đầu bằng số 0 và gồm đúng 10 chữ số"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label font-weight-bold">Địa chỉ nhận hàng *</label>
+                            <textarea name="address" class="form-control" rows="3" placeholder="Nhập số nhà, tên đường, phường/xã, quận/huyện..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg w-100 mt-3">✅ Xác nhận đặt hàng</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Cột phải: Tóm tắt đơn hàng -->
+            <div class="col-md-5">
+                <div class="card shadow-sm p-4">
+                    <h4 class="mb-3 fw-bold">Đơn hàng của bạn</h4>
+                    <ul class="list-group mb-3">
+                        {% for item_id, item in cart.items %}
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">{{ item.name }}</h6>
+                                <small class="text-muted">Số lượng: {{ item.quantity }}</small>
+                            </div>
+                            <span class="text-muted">{{ item.subtotal }} đ</span>
+                        </li>
+                        {% endfor %}
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <span class="fw-bold">Tổng thành tiền</span>
+                            <strong class="text-danger fs-5">{{ total_price }} đ</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
